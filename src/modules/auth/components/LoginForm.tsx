@@ -1,9 +1,7 @@
-import React, {lazy, useState} from 'react';
+import React, { useState} from 'react';
 import { FormattedMessage } from 'react-intl';
 import { ILoginParams, ILoginValidation } from '../../../models/auth';
 import { validateLogin, validLogin } from '../utils';
-import { replace } from 'connected-react-router';
-import HomePage from '../../../modules/home/pages/HomePage'
 
 
 
@@ -21,7 +19,7 @@ const LoginForm = (props: Props) => {
   const [formValues, setFormValues] = React.useState<ILoginParams>({ email: '', password: '', rememberMe: false });
   const [validate, setValidate] = React.useState<ILoginValidation>();
 
-  const [saveMe, setSaveMe] = useState(''); 
+  const [saveMe, setSaveMe] = useState(false); 
 
 
   const onSubmit = React.useCallback(() => {
@@ -100,7 +98,7 @@ const LoginForm = (props: Props) => {
                 value=""
                 checked={formValues.rememberMe}
                 onChange={(e) => setFormValues({ ...formValues, rememberMe: !!e.target.checked })}
-            onClick={() => setSaveMe(saveMe)}
+            onClick={() => setSaveMe(!saveMe)}
               />
               <label className="form-check-label" htmlFor="invalidCheck">
                 <FormattedMessage id="rememberMe" />
@@ -121,7 +119,7 @@ const LoginForm = (props: Props) => {
                 disabled={loading}
               >
                 {loading && <div className="spinner-border spinner-border-sm text-light mr-2" role="status" />}
-                <FormattedMessage id="register" />
+                <FormattedMessage id="login" />
               </button>
             </div>
           </div>
